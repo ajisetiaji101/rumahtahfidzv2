@@ -6,11 +6,11 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 const config = {
   env: process.env.NODE_ENV || "development",
-  port: 8000,
+  port: 8003,
   jwtSecret: process.env.JWT_SECRET || "YOUR_secret_key",
-  URL_DOMAIN: "/mims",
-  URL_IMAGE: process.env.URL_IMAGE || "/mims/images",
-  URL_API: "/mims/v1/api",
+  URL_DOMAIN: "/pondok",
+  URL_IMAGE: process.env.URL_IMAGE || "/pondok/images",
+  URL_API: "/pondok/v1/api",
   UPLOAD_DIR: "/storages"
 };
 var _default = config;

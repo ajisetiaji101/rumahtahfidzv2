@@ -7,6 +7,8 @@ var _cookieParser = _interopRequireDefault(require("cookie-parser"));
 var _helmet = _interopRequireDefault(require("helmet"));
 var _compression = _interopRequireDefault(require("compression"));
 var _indexRoute = _interopRequireDefault(require("./routes/indexRoute.js"));
+var _db = _interopRequireDefault(require("./config/db.js"));
+var _knexfile = _interopRequireDefault(require("./config/knexfile.js"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 const app = (0, _express.default)();
 app.use(_express.default.urlencoded({
@@ -14,12 +16,19 @@ app.use(_express.default.urlencoded({
 }));
 app.use(_express.default.json());
 app.use((0, _cookieParser.default)());
-app.use((0, _helmet.default)());
+
+// app.use(helmet());
+
 app.use((0, _compression.default)());
 app.use((0, _cors.default)({
   origin: "*"
 }));
-const PORT = process.env.PORT || 8001;
+const PORT = process.env.PORT || 8003;
+_db.default.raw("SELECT 1").then(() => {
+  console.log("Database connection established successfully.");
+}).catch(error => {
+  console.log("Failed to connect to database :", error.message);
+});
 app.use(_indexRoute.default);
 app.listen(PORT, () => {
   console.log("http://localhost:" + PORT);
