@@ -148,6 +148,11 @@ export default class SurahPendekSantriController {
       console.log(
         "===================== INSERT SURAH PENDEK SANTRI ======================="
       );
+
+      if (data.hasil !== "success") {
+        return res.status(500).json({ data: data.hasil });
+      }
+
       return res.status(200).json({ data });
     } catch (error) {
       console.log(
@@ -194,6 +199,11 @@ export default class SurahPendekSantriController {
       console.log(
         "===================== UPDATE SURAH PENDEK SANTRI ======================="
       );
+
+      if (data.hasil !== "success") {
+        return res.status(500).json({ data: data.hasil });
+      }
+
       return res.status(200).json({ data });
     } catch (error) {
       console.log(
@@ -232,6 +242,7 @@ export default class SurahPendekSantriController {
       console.log(
         "===================== DELETE SURAH PENDEK SANTRI ======================="
       );
+
       return res.status(200).json({ data });
     } catch (error) {
       console.log(

@@ -148,6 +148,11 @@ export default class SurahPendekGuruController {
       console.log(
         "===================== INSERT SURAH PENDEK GURU ======================="
       );
+
+      if (data.hasil !== "success") {
+        return res.status(500).json({ data: data.hasil });
+      }
+
       return res.status(200).json({ data });
     } catch (error) {
       console.log(
@@ -194,6 +199,11 @@ export default class SurahPendekGuruController {
       console.log(
         "===================== UPDATE SURAH PENDEK GURU ======================="
       );
+
+      if (data.hasil !== "success") {
+        return res.status(500).json({ data: data.hasil });
+      }
+
       return res.status(200).json({ data });
     } catch (error) {
       console.log(

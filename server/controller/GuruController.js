@@ -220,11 +220,24 @@ export default class GuruController {
         console.log(
           `${new Date()}  IP :  ${req.socket.remoteAddress}  METHOD:  ${
             req.method
-          } `
+          } FUNCTION : call gurus_insert('${payload.id}','${payload.name}','${
+            payload.niu
+          }','${payload.tempat}', '${payload.datebirth}', '${
+            payload.gender
+          }', '${payload.telephone}', '${payload.address}','${payload.ayah}','${
+            payload.ibu
+          }','${payload.mulai_masuk}','${payload.mulai_vakum}','${
+            payload.pondokId
+          }','${payload.photo}',@hasil )`
         );
         console.log(
           "===================== GET INSERT GURU FILE ======================="
         );
+
+        if (data.hasil !== "success") {
+          return res.status(500).json({ data: data.hasil });
+        }
+
         return res.status(200).json({ data });
       } else {
         const payload = {
@@ -258,11 +271,24 @@ export default class GuruController {
         console.log(
           `${new Date()}  IP :  ${req.socket.remoteAddress}  METHOD:  ${
             req.method
-          } `
+          } FUNCTION : call gurus_insert('${payload.id}','${payload.name}','${
+            payload.niu
+          }','${payload.tempat}', '${payload.datebirth}', '${
+            payload.gender
+          }', '${payload.telephone}', '${payload.address}','${payload.ayah}','${
+            payload.ibu
+          }','${payload.mulai_masuk}','','${payload.pondokId}','${
+            payload.photo
+          }',@hasil )`
         );
         console.log(
           "===================== GET INSERT GURU FILE ======================="
         );
+
+        if (data.hasil !== "success") {
+          return res.status(500).json({ data: data.hasil });
+        }
+
         return res.status(200).json({ data });
       }
     } catch (error) {
@@ -297,7 +323,7 @@ export default class GuruController {
           ayah: fields[7].value,
           ibu: fields[8].value,
           mulai_masuk: fields[9].value,
-          // mulai_vakum: null,
+          mulai_vakum: null,
           pondokId: fields[11].value,
           photo: files[0].file.newFilename,
         };
@@ -305,7 +331,7 @@ export default class GuruController {
         console.log(payload);
         const respon = await knex
           .raw(
-            `call gurus_update('${id}','${payload.name}','${payload.niu}','${payload.tempat}', '${payload.datebirth}', '${payload.gender}', '${payload.telephone}', '${payload.address}','${payload.ayah}','${payload.ibu}','${payload.mulai_masuk}','','${payload.pondokId}','${payload.photo}',@hasil )`
+            `call gurus_update('${id}','${payload.name}','${payload.niu}','${payload.tempat}', '${payload.datebirth}', '${payload.gender}', '${payload.telephone}', '${payload.address}','${payload.ayah}','${payload.ibu}','${payload.mulai_masuk}','${payload.mulai_vakum}','${payload.pondokId}','${payload.photo}',@hasil )`
           )
           .then((e) => e[0][0][0]);
 
@@ -314,11 +340,24 @@ export default class GuruController {
         console.log(
           `${new Date()}  IP :  ${req.socket.remoteAddress}  METHOD:  ${
             req.method
-          } `
+          } FUNCTION : call gurus_update('${id}','${payload.name}','${
+            payload.niu
+          }','${payload.tempat}', '${payload.datebirth}', '${
+            payload.gender
+          }', '${payload.telephone}', '${payload.address}','${payload.ayah}','${
+            payload.ibu
+          }','${payload.mulai_masuk}','','${payload.pondokId}','${
+            payload.photo
+          }',@hasil )`
         );
         console.log(
           "===================== UPDATE GURU FILE ======================="
         );
+
+        if (data.hasil !== "success") {
+          return res.status(500).json({ data: data.hasil });
+        }
+
         return res.status(200).json({ data });
       } else {
         const payload = {
@@ -347,11 +386,24 @@ export default class GuruController {
         console.log(
           `${new Date()}  IP :  ${req.socket.remoteAddress}  METHOD:  ${
             req.method
-          } `
+          } FUNCTION : call gurus_update('${id}','${payload.name}','${
+            payload.niu
+          }','${payload.tempat}', '${payload.datebirth}', '${
+            payload.gender
+          }', '${payload.telephone}', '${payload.address}','${payload.ayah}','${
+            payload.ibu
+          }','${payload.mulai_masuk}','${payload.mulai_vakum}','${
+            payload.pondokId
+          }','${payload.photo}',@hasil )`
         );
         console.log(
           "===================== UPDATE GURU FILE ======================="
         );
+
+        if (data.hasil !== "success") {
+          return res.status(500).json({ data: data.hasil });
+        }
+
         return res.status(200).json({ data });
       }
     } catch (error) {
@@ -387,8 +439,6 @@ export default class GuruController {
         pondokId,
       } = req.body;
 
-      console.log(mulai_vakum.length);
-
       if (mulai_vakum == "Invalid date" || mulai_vakum.length < 1) {
         const payload = {
           name,
@@ -401,7 +451,7 @@ export default class GuruController {
           ayah,
           ibu,
           mulai_masuk,
-          // mulai_vakum: null,
+          mulai_vakum: null,
           pondokId,
         };
 
@@ -418,11 +468,22 @@ export default class GuruController {
         console.log(
           `${new Date()}  IP :  ${req.socket.remoteAddress}  METHOD:  ${
             req.method
-          } `
+          } FUNCTION : call gurus_update('${id}','${payload.name}','${
+            payload.niu
+          }','${payload.tempat}', '${payload.datebirth}', '${
+            payload.gender
+          }', '${payload.telephone}', '${payload.address}','${payload.ayah}','${
+            payload.ibu
+          }','${payload.mulai_masuk}','','${payload.pondokId}','',@hasil )`
         );
         console.log(
           "===================== UPDATE GURU NO FILE ======================="
         );
+
+        if (data.hasil !== "success") {
+          return res.status(500).json({ data: data.hasil });
+        }
+
         return res.status(200).json({ data });
       } else {
         const payload = {
@@ -452,11 +513,23 @@ export default class GuruController {
         console.log(
           `${new Date()}  IP :  ${req.socket.remoteAddress}  METHOD:  ${
             req.method
-          } `
+          } FUNCTION : call gurus_update('${id}','${payload.name}','${
+            payload.niu
+          }','${payload.tempat}', '${payload.datebirth}', '${
+            payload.gender
+          }', '${payload.telephone}', '${payload.address}','${payload.ayah}','${
+            payload.ibu
+          }','${payload.mulai_masuk}','${payload.mulai_vakum}','${
+            payload.pondokId
+          }','',@hasil )`
         );
         console.log(
           "===================== UPDATE GURU NO FILE ======================="
         );
+        if (data.hasil !== "success") {
+          return res.status(500).json({ data: data.hasil });
+        }
+
         return res.status(200).json({ data });
       }
     } catch (error) {

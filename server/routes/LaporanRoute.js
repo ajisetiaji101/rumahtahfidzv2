@@ -5,8 +5,9 @@ import { uploadMultipleFile } from "../helpers/uploadFile.js";
 const router = Router();
 
 router.get(
-  "/laporansantri",
+  "/laporansantri/",
   IndexController.LaporanController.getHafalanSantri
 );
+router.get("/laporanguru/", IndexController.LaporanController.getHafalanGuru);
 
 export default router;

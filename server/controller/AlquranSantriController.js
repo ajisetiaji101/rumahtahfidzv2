@@ -154,6 +154,11 @@ export default class AlquranSantriController {
       console.log(
         "===================== INSERT ALQURAN SANTRI ======================="
       );
+
+      if (data.hasil !== "success") {
+        return res.status(500).json({ data: data.hasil });
+      }
+
       return res.status(200).json({ data });
     } catch (error) {
       console.log(
@@ -205,6 +210,11 @@ export default class AlquranSantriController {
       console.log(
         "===================== UPDATE ALQURAN SANTRI ======================="
       );
+
+      if (data.hasil !== "success") {
+        return res.status(500).json({ data: data.hasil });
+      }
+
       return res.status(200).json({ data });
     } catch (error) {
       console.log(

@@ -10,8 +10,6 @@ export default class UserController {
       console.log("===================== GET LOGIN =======================");
       const { email, password } = req.body;
 
-      console.log(req.body);
-
       const respon = await knex
         .raw(`select * from vw_user_profile where email = '${email}'`)
         .then((e) => e[0][0])
@@ -20,6 +18,8 @@ export default class UserController {
       const infouser = respon;
 
       const match = await bcrypt.compare(password, infouser.password);
+
+      console.log(match);
 
       if (match) {
         const userId = infouser.id;
@@ -47,7 +47,9 @@ export default class UserController {
         console.log(
           `${new Date()} ${new Date()}  IP :  ${
             req.socket.remoteAddress
-          }  METHOD:  ${req.method}`
+          }  METHOD:  ${
+            req.method
+          } FUNCTION : select * from vw_user_profile where email = '${email}'`
         );
         console.log(
           "===================== END LOGIN USER ======================="
@@ -276,11 +278,21 @@ export default class UserController {
       console.log(
         `${new Date()}  IP :  ${req.socket.remoteAddress}  METHOD:  ${
           req.method
-        }`
+        } FUNCTION : call user_insertuser('${payload.id}','${payload.name}','${
+          payload.email
+        }','${payload.password}','${payload.telephone}','${payload.address}','${
+          payload.age
+        }','${payload.datebirth}','${payload.gender}','${payload.photo}','','${
+          payload.roleId
+        }','${payload.pondokId}', @hasil)`
       );
       console.log(
         "===================== END CREATE USER ======================="
       );
+
+      if (data.hasil !== "success") {
+        return res.status(500).json({ data: data.hasil });
+      }
 
       res.status(200).json({ data });
     } catch (error) {
@@ -293,7 +305,7 @@ export default class UserController {
         "===================== END CREATE USER  ======================="
       );
 
-      return res.status(404).json({ data: error.message });
+      return res.status(404).json({ data: "Harap periksa kembali" });
     }
   }
 
@@ -343,11 +355,21 @@ export default class UserController {
       console.log(
         `${new Date()}  IP :  ${req.socket.remoteAddress}  METHOD:  ${
           req.method
-        }`
+        } FUNCTION : call user_insertuser('${payload.id}','${payload.name}','${
+          payload.email
+        }','${payload.password}','${payload.telephone}','${payload.address}','${
+          payload.age
+        }','${payload.datebirth}','${payload.gender}','','','${
+          payload.roleId
+        }','${payload.pondokId}', @hasil)`
       );
       console.log(
         "===================== END CREATE USER TANPA GAMBAR  ======================="
       );
+
+      if (data.hasil !== "success") {
+        return res.status(500).json({ data: data.hasil });
+      }
 
       res.status(200).json({ data });
     } catch (error) {
@@ -359,7 +381,7 @@ export default class UserController {
       console.log(
         "===================== END CREATE USER TANPA GAMBAR  ======================="
       );
-      return res.status(404).json({ data: error.message });
+      return res.status(404).json({ data: "Harap periksa kembali" });
     }
   }
 
@@ -405,31 +427,15 @@ export default class UserController {
           .then((e) => e[0][0][0]);
         const data = respon;
 
-        if (data.hasil == "success") {
-          console.log(
-            `${new Date()}  IP :  ${req.socket.remoteAddress}  METHOD:  ${
-              req.method
-            } `
-          );
-          console.log(
-            "===================== END UPDATE USER TANPA GAMBAR  ======================="
-          );
+        console.log(
+          "===================== END UPDATE USER TANPA GAMBAR  ======================="
+        );
 
-          return res.status(200).json({ data });
-        } else {
-          console.log(
-            `${new Date()}  IP :  ${req.socket.remoteAddress}  METHOD:  ${
-              req.method
-            } `
-          );
-          console.log(
-            "===================== END UPDATE USER TANPA GAMBAR  ======================="
-          );
-
-          return res
-            .status(404)
-            .json({ data: { hasil: "ID Tidak Ditemukan" } });
+        if (data.hasil !== "success") {
+          return res.status(500).json({ data: data.hasil });
         }
+
+        return res.status(200).json({ data });
       } else {
         const payload = {
           name,
@@ -452,31 +458,14 @@ export default class UserController {
           .then((e) => e[0][0][0]);
         const data = respon;
 
-        if (data.hasil == "success") {
-          console.log(
-            `${new Date()}  IP :  ${req.socket.remoteAddress}  METHOD:  ${
-              req.method
-            } `
-          );
-          console.log(
-            "===================== END UPDATE USER TANPA GAMBAR  ======================="
-          );
-
-          return res.status(200).json({ data });
-        } else {
-          console.log(
-            `${new Date()}  IP :  ${req.socket.remoteAddress}  METHOD:  ${
-              req.method
-            } `
-          );
-          console.log(
-            "===================== END UPDATE USER TANPA GAMBAR  ======================="
-          );
-
-          return res
-            .status(404)
-            .json({ data: { hasil: "ID Tidak Ditemukan" } });
+        console.log(
+          "===================== END UPDATE USER TANPA GAMBAR  ======================="
+        );
+        if (data.hasil !== "success") {
+          return res.status(500).json({ data: data.hasil });
         }
+
+        return res.status(200).json({ data });
       }
     } catch (error) {
       return res.status(404).json({ data: error.message });
@@ -518,31 +507,15 @@ export default class UserController {
           .then((e) => e[0][0][0]);
         const data = respon;
 
-        if (data.hasil == "success") {
-          console.log(
-            `${new Date()}  IP :  ${req.socket.remoteAddress}  METHOD:  ${
-              req.method
-            } `
-          );
-          console.log(
-            "===================== END UPDATE USER WITH IMAGE  ======================="
-          );
+        console.log(
+          "===================== END UPDATE USER WITH IMAGE  ======================="
+        );
 
-          return res.status(200).json({ data });
-        } else {
-          console.log(
-            `${new Date()}  IP :  ${req.socket.remoteAddress}  METHOD:  ${
-              req.method
-            } `
-          );
-          console.log(
-            "===================== END UPDATE USER WITH IMAGE  ======================="
-          );
-
-          return res
-            .status(404)
-            .json({ data: { hasil: "ID Tidak Ditemukan" } });
+        if (data.hasil !== "success") {
+          return res.status(500).json({ data: data.hasil });
         }
+
+        return res.status(200).json({ data });
       } else {
         const payload = {
           name: fields[0].value,
@@ -561,36 +534,21 @@ export default class UserController {
 
         const respon = await knex
           .raw(
-            `call user_updateuser('${id}','${payload.name}','${payload.email}','','${payload.telephone}','${payload.address}','${payload.age}','${payload.datebirth}','${payload.gender}','','${payload.roleId}','${payload.pondokId}', @hasil)`
+            `call user_updateuser('${id}','${payload.name}','${payload.email}','','${payload.telephone}','${payload.address}','${payload.age}','${payload.datebirth}','${payload.gender}','${payload.photo}','${payload.roleId}','${payload.pondokId}', @hasil)`
           )
           .then((e) => e[0][0][0]);
+
         const data = respon;
 
-        if (data.hasil == "success") {
-          console.log(
-            `${new Date()}  IP :  ${req.socket.remoteAddress}  METHOD:  ${
-              req.method
-            } `
-          );
-          console.log(
-            "===================== END UPDATE USER WITH IMAGE  ======================="
-          );
+        console.log(
+          "===================== END UPDATE USER WITH IMAGE  ======================="
+        );
 
-          return res.status(200).json({ data });
-        } else {
-          console.log(
-            `${new Date()}  IP :  ${req.socket.remoteAddress}  METHOD:  ${
-              req.method
-            } `
-          );
-          console.log(
-            "===================== END UPDATE USER WITH IMAGE  ======================="
-          );
-
-          return res
-            .status(404)
-            .json({ data: { hasil: "ID Tidak Ditemukan" } });
+        if (data.hasil !== "success") {
+          return res.status(500).json({ data: data.hasil });
         }
+
+        return res.status(200).json({ data });
       }
     } catch (error) {
       console.log(
@@ -602,7 +560,7 @@ export default class UserController {
         "===================== END UPDATE USER WITH IMAGE  ======================="
       );
 
-      return res.status(404).json({ data: error.message });
+      return res.status(404).json({ data: "Harap diperiksa kembali" });
     }
   }
 
@@ -680,8 +638,12 @@ export default class UserController {
         .raw(
           `call user_insertuser('${payload.id}','${payload.name}','${payload.email}','${payload.password}','${payload.telephone}','${payload.address}','${payload.age}','${payload.datebirth}','${payload.gender}','${payload.photo}','','${payload.roleId}','${payload.pondokId}', @hasil)`
         )
-        .then((e) => e[0][0]);
+        .then((e) => e[0][0][0]);
       const data = respon;
+
+      if (data.hasil !== "success") {
+        return res.status(500).json({ data: data.hasil });
+      }
 
       res.status(200).json({ data });
     } catch (error) {
@@ -725,8 +687,12 @@ export default class UserController {
         .raw(
           `call user_insertuser('${payload.id}','${payload.name}','${payload.email}','${payload.password}','${payload.telephone}','${payload.address}','${payload.age}','${payload.datebirth}','${payload.gender}','','','${payload.roleId}','${payload.pondokId}', @hasil)`
         )
-        .then((e) => e[0][0]);
+        .then((e) => e[0][0][0]);
       const data = respon;
+
+      if (data.hasil !== "success") {
+        return res.status(500).json({ data: data.hasil });
+      }
 
       res.status(200).json({ data });
     } catch (error) {

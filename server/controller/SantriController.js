@@ -1,3 +1,4 @@
+import { EagerLoadingError } from "sequelize";
 import knex from "../config/db.js";
 const uuid = require("uuid");
 
@@ -157,7 +158,7 @@ export default class SantriController {
       const { id } = req.params;
 
       const respon = await knex
-        .raw(`call santri_getdropdown('','${id}')`)
+        .raw(`call santri_detailuser('','${id}')`)
         .then((e) => e[0][0]);
 
       const data = respon;
@@ -165,7 +166,7 @@ export default class SantriController {
       console.log(
         `${new Date()}  IP :  ${req.socket.remoteAddress}  METHOD:  ${
           req.method
-        } FUNCTION : call santri_getdropdown('','${id}') `
+        } FUNCTION : call santri_detailuser('','${id}') `
       );
       console.log(
         "===================== END GET SANTRI BY USER ID  ======================="
@@ -202,7 +203,7 @@ export default class SantriController {
       console.log(
         `${new Date()}  IP :  ${req.socket.remoteAddress}  METHOD:  ${
           req.method
-        } `
+        } FUNCTION: call santri_getdropdown('${id}','')`
       );
       console.log(
         "===================== END GET SANTRI BY PONDOK ID  ======================="
@@ -283,6 +284,8 @@ export default class SantriController {
           "===================== GET INSERT SANTRI FILE ======================="
         );
 
+        console.log(payload);
+
         const respon = await knex
           .raw(
             `call santris_insert('${payload.id}','${payload.name}','${payload.nis}','${payload.tempat}', '${payload.datebirth}', '${payload.gender}', '${payload.telephone}', '${payload.address}','${payload.ayah}','${payload.ibu}','${payload.mulai_masuk}','${payload.mulai_vakum}','${payload.pondokId}','${payload.photo}',@hasil )`
@@ -294,17 +297,30 @@ export default class SantriController {
         console.log(
           `${new Date()}  IP :  ${req.socket.remoteAddress}  METHOD:  ${
             req.method
-          } `
+          }  FUNCTION : call santris_insert('${payload.id}','${
+            payload.name
+          }','${payload.nis}','${payload.tempat}', '${payload.datebirth}', '${
+            payload.gender
+          }', '${payload.telephone}', '${payload.address}','${payload.ayah}','${
+            payload.ibu
+          }','${payload.mulai_masuk}','${payload.mulai_vakum}','${
+            payload.pondokId
+          }','${payload.photo}',@hasil )`
         );
         console.log(
           "===================== GET INSERT SANTRI FILE ======================="
         );
+
+        if (data.hasil !== "success") {
+          return res.status(500).json({ data: data.hasil });
+        }
+
         return res.status(200).json({ data });
       } else {
         const payload = {
           id: uuid.v4(),
           name: fields[0].value,
-          niu: fields[1].value,
+          nis: fields[1].value,
           tempat: fields[2].value,
           datebirth: fields[3].value,
           gender: fields[4].value,
@@ -321,6 +337,8 @@ export default class SantriController {
           "===================== GET INSERT SANTRI ======================="
         );
 
+        console.log(payload);
+
         const respon = await knex
           .raw(
             `call santris_insert('${payload.id}','${payload.name}','${payload.nis}','${payload.tempat}', '${payload.datebirth}', '${payload.gender}', '${payload.telephone}', '${payload.address}','${payload.ayah}','${payload.ibu}','${payload.mulai_masuk}','','${payload.pondokId}','${payload.photo}',@hasil )`
@@ -332,11 +350,24 @@ export default class SantriController {
         console.log(
           `${new Date()}  IP :  ${req.socket.remoteAddress}  METHOD:  ${
             req.method
-          } `
+          } FUNCTION : call santris_insert('${payload.id}','${payload.name}','${
+            payload.nis
+          }','${payload.tempat}', '${payload.datebirth}', '${
+            payload.gender
+          }', '${payload.telephone}', '${payload.address}','${payload.ayah}','${
+            payload.ibu
+          }','${payload.mulai_masuk}','','${payload.pondokId}','${
+            payload.photo
+          }',@hasil )`
         );
         console.log(
           "===================== GET INSERT SANTRI FILE ======================="
         );
+
+        if (data.hasil !== "success") {
+          return res.status(500).json({ data: data.hasil });
+        }
+
         return res.status(200).json({ data });
       }
     } catch (error) {
@@ -371,7 +402,7 @@ export default class SantriController {
           ayah: fields[7].value,
           ibu: fields[8].value,
           mulai_masuk: fields[9].value,
-          // mulai_vakum: null,
+          mulai_vakum: null,
           pondokId: fields[11].value,
           photo: files[0].file.newFilename,
         };
@@ -379,7 +410,7 @@ export default class SantriController {
         console.log(payload);
         const respon = await knex
           .raw(
-            `call santris_update('${id}','${payload.name}','${payload.nis}','${payload.tempat}', '${payload.datebirth}', '${payload.gender}', '${payload.telephone}', '${payload.address}','${payload.ayah}','${payload.ibu}','${payload.mulai_masuk}','','${payload.pondokId}','${payload.photo}',@hasil )`
+            `call santris_update('${id}','${payload.name}','${payload.nis}','${payload.tempat}', '${payload.datebirth}', '${payload.gender}', '${payload.telephone}', '${payload.address}','${payload.ayah}','${payload.ibu}','${payload.mulai_masuk}','${payload.mulai_vakum}','${payload.pondokId}','${payload.photo}',@hasil )`
           )
           .then((e) => e[0][0][0]);
 
@@ -388,11 +419,24 @@ export default class SantriController {
         console.log(
           `${new Date()}  IP :  ${req.socket.remoteAddress}  METHOD:  ${
             req.method
-          } `
+          } FUNCTION : call santris_update('${id}','${payload.name}','${
+            payload.nis
+          }','${payload.tempat}', '${payload.datebirth}', '${
+            payload.gender
+          }', '${payload.telephone}', '${payload.address}','${payload.ayah}','${
+            payload.ibu
+          }','${payload.mulai_masuk}','','${payload.pondokId}','${
+            payload.photo
+          }',@hasil )`
         );
         console.log(
           "===================== UPDATE SANTRI FILE ======================="
         );
+
+        if (data.hasil !== "success") {
+          return res.status(500).json({ data: data.hasil });
+        }
+
         return res.status(200).json({ data });
       } else {
         const payload = {
@@ -421,11 +465,23 @@ export default class SantriController {
         console.log(
           `${new Date()}  IP :  ${req.socket.remoteAddress}  METHOD:  ${
             req.method
-          } `
+          } FUNCTION : call santris_update('${id}','${payload.name}','${
+            payload.nis
+          }','${payload.tempat}', '${payload.datebirth}', '${
+            payload.gender
+          }', '${payload.telephone}', '${payload.address}','${payload.ayah}','${
+            payload.ibu
+          }','${payload.mulai_masuk}','${payload.mulai_vakum}','${
+            payload.pondokId
+          }','${payload.photo}',@hasil )`
         );
         console.log(
           "===================== UPDATE SANTRI FILE ======================="
         );
+        if (data.hasil !== "success") {
+          return res.status(500).json({ data: data.hasil });
+        }
+
         return res.status(200).json({ data });
       }
     } catch (error) {
@@ -461,9 +517,7 @@ export default class SantriController {
         pondokId,
       } = req.body;
 
-      console.log(mulai_vakum.length);
-
-      if (mulai_vakum == "Invalid date" || mulai_vakum.length < 1) {
+      if (mulai_vakum.length < 1) {
         const payload = {
           name,
           nis,
@@ -475,15 +529,13 @@ export default class SantriController {
           ayah,
           ibu,
           mulai_masuk,
-          // mulai_vakum: null,
+          mulai_vakum: null,
           pondokId,
         };
 
-        console.log(payload);
-
         const respon = await knex
           .raw(
-            `call gurus_update('${id}','${payload.name}','${payload.nis}','${payload.tempat}', '${payload.datebirth}', '${payload.gender}', '${payload.telephone}', '${payload.address}','${payload.ayah}','${payload.ibu}','${payload.mulai_masuk}','','${payload.pondokId}','',@hasil )`
+            `call santris_update('${id}','${payload.name}','${payload.nis}','${payload.tempat}', '${payload.datebirth}', '${payload.gender}', '${payload.telephone}', '${payload.address}','${payload.ayah}','${payload.ibu}','${payload.mulai_masuk}','${payload.mulai_vakum}','${payload.pondokId}','',@hasil )`
           )
           .then((e) => e[0][0][0]);
 
@@ -492,11 +544,22 @@ export default class SantriController {
         console.log(
           `${new Date()}  IP :  ${req.socket.remoteAddress}  METHOD:  ${
             req.method
-          } `
+          } call santris_update('${id}','${payload.name}','${payload.nis}','${
+            payload.tempat
+          }', '${payload.datebirth}', '${payload.gender}', '${
+            payload.telephone
+          }', '${payload.address}','${payload.ayah}','${payload.ibu}','${
+            payload.mulai_masuk
+          }','','${payload.pondokId}','',@hasil )`
         );
         console.log(
           "===================== UPDATE SANTRI NO FILE ======================="
         );
+
+        if (data.hasil !== "success") {
+          return res.status(500).json({ data: data.hasil });
+        }
+
         return res.status(200).json({ data });
       } else {
         const payload = {
@@ -526,11 +589,24 @@ export default class SantriController {
         console.log(
           `${new Date()}  IP :  ${req.socket.remoteAddress}  METHOD:  ${
             req.method
-          } `
+          } FUNCTION : call santris_update('${id}','${payload.name}','${
+            payload.nis
+          }','${payload.tempat}', '${payload.datebirth}', '${
+            payload.gender
+          }', '${payload.telephone}', '${payload.address}','${payload.ayah}','${
+            payload.ibu
+          }','${payload.mulai_masuk}','${payload.mulai_vakum}','${
+            payload.pondokId
+          }','',@hasil )`
         );
         console.log(
           "===================== UPDATE SANTRI NO FILE ======================="
         );
+
+        if (data.hasil !== "success") {
+          return res.status(500).json({ data: data.hasil });
+        }
+
         return res.status(200).json({ data });
       }
     } catch (error) {

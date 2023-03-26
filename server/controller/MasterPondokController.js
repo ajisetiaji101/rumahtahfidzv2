@@ -166,22 +166,32 @@ export default class MasterPondokController {
         photo: files[1].file.newFilename,
       };
 
+      console.log(payload);
+
       const respon = await knex
         .raw(
-          `call masterpondok_insert('${payload.id}','${payload.name}', '${payload.nit}', '${payload.address}', '${payload.telephone}', '${payload.chief}', '${payload.logo}', '${payload.photo}')`
+          `call masterpondok_insert('${payload.id}','${payload.name}', '${payload.nit}', '${payload.address}', '${payload.telephone}', '${payload.chief}', '${payload.logo}', '${payload.photo}', @hasil)`
         )
-        .then((e) => e[0][0]);
+        .then((e) => e[0][0][0]);
 
       const data = respon;
 
       console.log(
         `${new Date()}  IP :  ${req.socket.remoteAddress}  METHOD:  ${
           req.method
-        }`
+        } FUNCTION : call masterpondok_insert('${payload.id}','${
+          payload.name
+        }', '${payload.nit}', '${payload.address}', '${payload.telephone}', '${
+          payload.chief
+        }', '${payload.logo}', '${payload.photo}', @hasil)`
       );
       console.log(
         "===================== END INSERT MASTERPONDOK ======================="
       );
+
+      if (data.hasil !== "success") {
+        return res.status(500).json({ data: data.hasil });
+      }
 
       return res.status(200).json({ data });
     } catch (error) {
@@ -194,7 +204,7 @@ export default class MasterPondokController {
         "===================== END INSERT MASTERPONDOK ======================="
       );
 
-      return res.status(400).json({ data: error.message });
+      return res.status(400).json({ data: "Pastikan data terisi benar" });
     }
   };
 
@@ -228,7 +238,7 @@ export default class MasterPondokController {
           .raw(
             `call masterpondok_update('${id}','${payload.name}', '${payload.nit}', '${payload.address}', '${payload.telephone}', '${payload.chief}', '${payload.logo}', '${payload.photo}', @hasil)`
           )
-          .then((e) => e[0][0]);
+          .then((e) => e[0][0][0]);
 
         const data = respon;
 
@@ -240,6 +250,10 @@ export default class MasterPondokController {
         console.log(
           "===================== END UPDATE MASTERPONDOK ======================="
         );
+
+        if (data.hasil !== "success") {
+          return res.status(500).json({ data: data.hasil });
+        }
 
         return res.status(200).json({ data });
       } catch (error) {
@@ -273,7 +287,7 @@ export default class MasterPondokController {
           .raw(
             `call masterpondok_update('${id}','${payload.name}', '${payload.nit}', '${payload.address}', '${payload.telephone}', '${payload.chief}', '', '${payload.photo}', @hasil)`
           )
-          .then((e) => e[0][0]);
+          .then((e) => e[0][0][0]);
 
         const data = respon;
 
@@ -318,7 +332,7 @@ export default class MasterPondokController {
           .raw(
             `call masterpondok_update('${id}','${payload.name}', '${payload.nit}', '${payload.address}', '${payload.telephone}', '${payload.chief}', '${payload.logo}', '', @hasil)`
           )
-          .then((e) => e[0][0]);
+          .then((e) => e[0][0][0]);
 
         const data = respon;
 
@@ -330,6 +344,10 @@ export default class MasterPondokController {
         console.log(
           "===================== END UPDATE MASTERPONDOK ======================="
         );
+
+        if (data.hasil !== "success") {
+          return res.status(500).json({ data: data.hasil });
+        }
 
         return res.status(200).json({ data });
       } catch (error) {
@@ -365,7 +383,7 @@ export default class MasterPondokController {
         .raw(
           `call masterpondok_update('${id}','${payload.name}', '${payload.nit}', '${payload.address}', '${payload.telephone}', '${payload.chief}', '${payload.logo}', '', @hasil)`
         )
-        .then((e) => e[0][0]);
+        .then((e) => e[0][0][0]);
 
       const data = respon;
 
@@ -377,6 +395,10 @@ export default class MasterPondokController {
       console.log(
         "===================== END UPDATE MASTERPONDOK ======================="
       );
+
+      if (data.hasil !== "success") {
+        return res.status(500).json({ data: data.hasil });
+      }
 
       return res.status(200).json({ data });
     } catch (error) {

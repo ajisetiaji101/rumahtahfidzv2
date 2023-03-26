@@ -142,11 +142,20 @@ export default class IqroSantriController {
       console.log(
         `${new Date()}  IP :  ${req.socket.remoteAddress}  METHOD:  ${
           req.method
-        } `
+        } FUNCTION : call iqrosantri_insert('${payload.name}','${
+          payload.halaman
+        }','${payload.tgl_selesai}','${payload.ket}', '${
+          payload.santriId
+        }',@hasil )`
       );
       console.log(
         "===================== INSERT IQRO SANTRI ======================="
       );
+
+      if (data.hasil !== "success") {
+        return res.status(500).json({ data: data.hasil });
+      }
+
       return res.status(200).json({ data });
     } catch (error) {
       console.log(
@@ -196,6 +205,11 @@ export default class IqroSantriController {
       console.log(
         "===================== UPDATE IQRO SANTRI ======================="
       );
+
+      if (data.hasil !== "success") {
+        return res.status(500).json({ data: data.hasil });
+      }
+
       return res.status(200).json({ data });
     } catch (error) {
       console.log(

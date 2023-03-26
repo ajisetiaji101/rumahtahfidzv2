@@ -147,6 +147,11 @@ export default class IqroGuruController {
       console.log(
         "===================== INSERT IQRO GURU ======================="
       );
+
+      if (data.hasil !== "success") {
+        return res.status(500).json({ data: data.hasil });
+      }
+
       return res.status(200).json({ data });
     } catch (error) {
       console.log(
@@ -194,6 +199,11 @@ export default class IqroGuruController {
       console.log(
         "===================== UPDATE IQRO GURU ======================="
       );
+
+      if (data.hasil !== "success") {
+        return res.status(500).json({ data: data.hasil });
+      }
+
       return res.status(200).json({ data });
     } catch (error) {
       console.log(

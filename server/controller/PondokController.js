@@ -190,11 +190,9 @@ export default class PondokController {
   };
 
   static async createPondok(req, res) {
-    "===================== INSERT PONDOK =======================";
+    console.log("===================== INSERT PONDOK =======================");
     try {
       const { files, fields } = req.fileAttrb;
-
-      console.log("masuksini");
       const payload = {
         id: uuid.v4(),
         name: fields[0].value,
@@ -210,18 +208,26 @@ export default class PondokController {
         .raw(
           `call pondok_insert('${payload.id}','${payload.name}', '${payload.nit}', '${payload.address}', '${payload.telephone}', '${payload.chief}', '${payload.photo}', '${payload.masterpondokId}', @hasil)`
         )
-        .then((e) => e[0][0]);
+        .then((e) => e[0][0][0]);
 
       const data = respon;
 
       console.log(
         `${new Date()}  IP :  ${req.socket.remoteAddress}  METHOD:  ${
           req.method
-        }`
+        } FUNCTION : call pondok_insert('${payload.id}','${payload.name}', '${
+          payload.nit
+        }', '${payload.address}', '${payload.telephone}', '${
+          payload.chief
+        }', '${payload.photo}', '${payload.masterpondokId}', @hasil)`
       );
       console.log(
         "===================== END INSERT PONDOK ======================="
       );
+
+      if (data.hasil !== "success") {
+        return res.status(500).json({ data: data.hasil });
+      }
 
       return res.status(200).json({ data });
     } catch (error) {
@@ -298,18 +304,26 @@ export default class PondokController {
         .raw(
           `call pondok_update('${id}','${payload.name}', '${payload.nit}', '${payload.address}', '${payload.telephone}', '${payload.chief}', '${payload.photo}', @hasil)`
         )
-        .then((e) => e[0][0]);
+        .then((e) => e[0][0][0]);
 
       const data = respon;
 
       console.log(
         `${new Date()}  IP :  ${req.socket.remoteAddress}  METHOD:  ${
           req.method
-        }`
+        } FUNCTION : call pondok_update('${id}','${payload.name}', '${
+          payload.nit
+        }', '${payload.address}', '${payload.telephone}', '${
+          payload.chief
+        }', '${payload.photo}', @hasil)`
       );
       console.log(
         "===================== END UPDATE PONDOK FILE ======================="
       );
+
+      if (data.hasil !== "success") {
+        return res.status(500).json({ data: data.hasil });
+      }
 
       return res.status(200).json({ data });
     } catch (error) {
@@ -346,18 +360,26 @@ export default class PondokController {
         .raw(
           `call pondok_update('${id}','${payload.name}', '${payload.nit}', '${payload.address}', '${payload.telephone}', '${payload.chief}','', @hasil)`
         )
-        .then((e) => e[0][0]);
+        .then((e) => e[0][0][0]);
 
       const data = respon;
 
       console.log(
         `${new Date()}  IP :  ${req.socket.remoteAddress}  METHOD:  ${
           req.method
-        }`
+        } FUNCTION : call pondok_update('${id}','${payload.name}', '${
+          payload.nit
+        }', '${payload.address}', '${payload.telephone}', '${
+          payload.chief
+        }','', @hasil)`
       );
       console.log(
         "===================== END UPDATE PONDOK NO FILE ======================="
       );
+
+      if (data.hasil !== "success") {
+        return res.status(500).json({ data: data.hasil });
+      }
 
       return res.status(200).json({ data });
     } catch (error) {

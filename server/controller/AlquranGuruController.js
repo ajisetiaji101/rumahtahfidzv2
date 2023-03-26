@@ -157,6 +157,11 @@ export default class AlquranGuruController {
       console.log(
         "===================== INSERT ALQURAN GURU ======================="
       );
+
+      if (data.hasil !== "success") {
+        return res.status(500).json({ data: data.hasil });
+      }
+
       return res.status(200).json({ data });
     } catch (error) {
       console.log(
@@ -210,6 +215,11 @@ export default class AlquranGuruController {
       console.log(
         "===================== UPDATE ALQURAN GURU ======================="
       );
+
+      if (data.hasil !== "success") {
+        return res.status(500).json({ data: data.hasil });
+      }
+
       return res.status(200).json({ data });
     } catch (error) {
       console.log(
