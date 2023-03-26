@@ -20,7 +20,7 @@ app.use(compress());
 
 app.use(cors({ origin: "*" }));
 
-const PORT = process.env.PORT || 8001;
+const PORT = process.env.PORT || 8003;
 
 knex
   .raw("SELECT 1")
