@@ -2,11 +2,9 @@ import express from "express";
 import "dotenv/config";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import helmet from "helmet";
 import compress from "compression";
-import routes from "./routes/indexRoute.js";
+import routes from "./routes/IndexRoute";
 import knex from "./config/db.js";
-import knexfile from "./config/knexfile.js";
 
 const app = express();
 
