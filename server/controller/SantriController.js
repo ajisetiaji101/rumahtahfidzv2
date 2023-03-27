@@ -410,7 +410,7 @@ export default class SantriController {
         console.log(payload);
         const respon = await knex
           .raw(
-            `call santris_update('${id}','${payload.name}','${payload.nis}','${payload.tempat}', '${payload.datebirth}', '${payload.gender}', '${payload.telephone}', '${payload.address}','${payload.ayah}','${payload.ibu}','${payload.mulai_masuk}','${payload.mulai_vakum}','${payload.pondokId}','${payload.photo}',@hasil )`
+            `call santris_update('${id}','${payload.name}','${payload.nis}','${payload.tempat}', '${payload.datebirth}', '${payload.gender}', '${payload.telephone}', '${payload.address}','${payload.ayah}','${payload.ibu}','${payload.mulai_masuk}',${payload.mulai_vakum},'${payload.pondokId}','${payload.photo}',@hasil )`
           )
           .then((e) => e[0][0][0]);
 
@@ -535,7 +535,7 @@ export default class SantriController {
 
         const respon = await knex
           .raw(
-            `call santris_update('${id}','${payload.name}','${payload.nis}','${payload.tempat}', '${payload.datebirth}', '${payload.gender}', '${payload.telephone}', '${payload.address}','${payload.ayah}','${payload.ibu}','${payload.mulai_masuk}','${payload.mulai_vakum}','${payload.pondokId}','',@hasil )`
+            `call santris_update('${id}','${payload.name}','${payload.nis}','${payload.tempat}', '${payload.datebirth}', '${payload.gender}', '${payload.telephone}', '${payload.address}','${payload.ayah}','${payload.ibu}','${payload.mulai_masuk}',${payload.mulai_vakum},'${payload.pondokId}','',@hasil )`
           )
           .then((e) => e[0][0][0]);
 
