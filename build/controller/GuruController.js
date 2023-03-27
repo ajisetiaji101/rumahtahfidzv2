@@ -111,7 +111,7 @@ class GuruController {
           photo: files[0].file.newFilename
         };
         console.log(payload);
-        const respon = await _db.default.raw(`call gurus_update('${id}','${payload.name}','${payload.niu}','${payload.tempat}', '${payload.datebirth}', '${payload.gender}', '${payload.telephone}', '${payload.address}','${payload.ayah}','${payload.ibu}','${payload.mulai_masuk}','${payload.mulai_vakum}','${payload.pondokId}','${payload.photo}',@hasil )`).then(e => e[0][0][0]);
+        const respon = await _db.default.raw(`call gurus_update('${id}','${payload.name}','${payload.niu}','${payload.tempat}', '${payload.datebirth}', '${payload.gender}', '${payload.telephone}', '${payload.address}','${payload.ayah}','${payload.ibu}','${payload.mulai_masuk}',${payload.mulai_vakum},'${payload.pondokId}','${payload.photo}',@hasil )`).then(e => e[0][0][0]);
         const data = respon;
         console.log(`${new Date()}  IP :  ${req.socket.remoteAddress}  METHOD:  ${req.method} FUNCTION : call gurus_update('${id}','${payload.name}','${payload.niu}','${payload.tempat}', '${payload.datebirth}', '${payload.gender}', '${payload.telephone}', '${payload.address}','${payload.ayah}','${payload.ibu}','${payload.mulai_masuk}','','${payload.pondokId}','${payload.photo}',@hasil )`);
         console.log("===================== UPDATE GURU FILE =======================");

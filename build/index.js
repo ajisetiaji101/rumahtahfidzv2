@@ -4,11 +4,9 @@ var _express = _interopRequireDefault(require("express"));
 require("dotenv/config");
 var _cors = _interopRequireDefault(require("cors"));
 var _cookieParser = _interopRequireDefault(require("cookie-parser"));
-var _helmet = _interopRequireDefault(require("helmet"));
 var _compression = _interopRequireDefault(require("compression"));
-var _indexRoute = _interopRequireDefault(require("./routes/indexRoute.js"));
+var _IndexRoute = _interopRequireDefault(require("./routes/IndexRoute"));
 var _db = _interopRequireDefault(require("./config/db.js"));
-var _knexfile = _interopRequireDefault(require("./config/knexfile.js"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 const app = (0, _express.default)();
 app.use(_express.default.urlencoded({
@@ -29,7 +27,7 @@ _db.default.raw("SELECT 1").then(() => {
 }).catch(error => {
   console.log("Failed to connect to database :", error.message);
 });
-app.use(_indexRoute.default);
+app.use(_IndexRoute.default);
 app.listen(PORT, () => {
   console.log("http://localhost:" + PORT);
 });
