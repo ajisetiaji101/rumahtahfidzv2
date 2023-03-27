@@ -341,7 +341,7 @@ export default class SantriController {
 
         const respon = await knex
           .raw(
-            `call santris_insert('${payload.id}','${payload.name}','${payload.nis}','${payload.tempat}', '${payload.datebirth}', '${payload.gender}', '${payload.telephone}', '${payload.address}','${payload.ayah}','${payload.ibu}','${payload.mulai_masuk}','','${payload.pondokId}','${payload.photo}',@hasil )`
+            `call santris_insert('${payload.id}','${payload.name}','${payload.nis}','${payload.tempat}', '${payload.datebirth}', '${payload.gender}', '${payload.telephone}', '${payload.address}','${payload.ayah}','${payload.ibu}','${payload.mulai_masuk}',null,'${payload.pondokId}','${payload.photo}',@hasil )`
           )
           .then((e) => e[0][0][0]);
 
@@ -356,7 +356,7 @@ export default class SantriController {
             payload.gender
           }', '${payload.telephone}', '${payload.address}','${payload.ayah}','${
             payload.ibu
-          }','${payload.mulai_masuk}','','${payload.pondokId}','${
+          }','${payload.mulai_masuk}',null,'${payload.pondokId}','${
             payload.photo
           }',@hasil )`
         );
@@ -390,7 +390,7 @@ export default class SantriController {
 
       const { files, fields } = req.fileAttrb;
 
-      if (fields[10].value == "Invalid date") {
+      if (fields[10].value == "Invalid date" || fields[10].value.length < 1) {
         const payload = {
           name: fields[0].value,
           nis: fields[1].value,
@@ -517,7 +517,7 @@ export default class SantriController {
         pondokId,
       } = req.body;
 
-      if (mulai_vakum.length < 1) {
+      if (mulai_vakum == "Invalid date" || mulai_vakum.length < 1) {
         const payload = {
           name,
           nis,

@@ -262,7 +262,7 @@ export default class GuruController {
 
         const respon = await knex
           .raw(
-            `call gurus_insert('${payload.id}','${payload.name}','${payload.niu}','${payload.tempat}', '${payload.datebirth}', '${payload.gender}', '${payload.telephone}', '${payload.address}','${payload.ayah}','${payload.ibu}','${payload.mulai_masuk}','','${payload.pondokId}','${payload.photo}',@hasil )`
+            `call gurus_insert('${payload.id}','${payload.name}','${payload.niu}','${payload.tempat}', '${payload.datebirth}', '${payload.gender}', '${payload.telephone}', '${payload.address}','${payload.ayah}','${payload.ibu}','${payload.mulai_masuk}',null,'${payload.pondokId}','${payload.photo}',@hasil )`
           )
           .then((e) => e[0][0][0]);
 
@@ -277,7 +277,7 @@ export default class GuruController {
             payload.gender
           }', '${payload.telephone}', '${payload.address}','${payload.ayah}','${
             payload.ibu
-          }','${payload.mulai_masuk}','','${payload.pondokId}','${
+          }','${payload.mulai_masuk}',null,'${payload.pondokId}','${
             payload.photo
           }',@hasil )`
         );
@@ -307,11 +307,15 @@ export default class GuruController {
 
   static async updateGuru(req, res) {
     try {
+      console.log(
+        "===================== UPDATE GURU FILE ======================="
+      );
+
       const { id } = req.params;
 
       const { files, fields } = req.fileAttrb;
 
-      if (fields[10].value == "Invalid date") {
+      if (fields[10].value == "Invalid date" || fields[10].value.length < 1) {
         const payload = {
           name: fields[0].value,
           niu: fields[1].value,
@@ -346,12 +350,9 @@ export default class GuruController {
             payload.gender
           }', '${payload.telephone}', '${payload.address}','${payload.ayah}','${
             payload.ibu
-          }','${payload.mulai_masuk}','','${payload.pondokId}','${
-            payload.photo
-          }',@hasil )`
-        );
-        console.log(
-          "===================== UPDATE GURU FILE ======================="
+          }','${payload.mulai_masuk}',${payload.mulai_vakum},'${
+            payload.pondokId
+          }','${payload.photo}',@hasil )`
         );
 
         if (data.hasil !== "success") {
@@ -459,7 +460,7 @@ export default class GuruController {
 
         const respon = await knex
           .raw(
-            `call gurus_update('${id}','${payload.name}','${payload.niu}','${payload.tempat}', '${payload.datebirth}', '${payload.gender}', '${payload.telephone}', '${payload.address}','${payload.ayah}','${payload.ibu}','${payload.mulai_masuk}','','${payload.pondokId}','',@hasil )`
+            `call gurus_update('${id}','${payload.name}','${payload.niu}','${payload.tempat}', '${payload.datebirth}', '${payload.gender}', '${payload.telephone}', '${payload.address}','${payload.ayah}','${payload.ibu}','${payload.mulai_masuk}',${payload.mulai_vakum},'${payload.pondokId}','',@hasil )`
           )
           .then((e) => e[0][0][0]);
 
@@ -474,7 +475,9 @@ export default class GuruController {
             payload.gender
           }', '${payload.telephone}', '${payload.address}','${payload.ayah}','${
             payload.ibu
-          }','${payload.mulai_masuk}','','${payload.pondokId}','',@hasil )`
+          }','${payload.mulai_masuk}',${payload.mulai_vakum},'${
+            payload.pondokId
+          }','',@hasil )`
         );
         console.log(
           "===================== UPDATE GURU NO FILE ======================="
