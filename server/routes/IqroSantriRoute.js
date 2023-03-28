@@ -1,11 +1,17 @@
 import { Router } from "express";
 import IndexController from "../controller/IndexController.js";
+import verifyToken from "../middleware/verifyToken.js";
 
 const router = Router();
 
-router.post("/insert", IndexController.IqroSantriController.insert);
+router.post(
+  "/insert",
+  verifyToken,
+  IndexController.IqroSantriController.insert
+);
 router.get(
   "/getlistawal/",
+  verifyToken,
   IndexController.IqroSantriController.getListIqroAwal
 );
 router.get(
@@ -14,10 +20,23 @@ router.get(
 );
 router.get(
   "/getlisthafalan/:id",
+  verifyToken,
   IndexController.IqroSantriController.getListHafalanIqro
 );
-router.get("/getid/:id", IndexController.IqroSantriController.getHafalanId);
-router.post("/delete/:id", IndexController.IqroSantriController.delete);
-router.post("/update/:id", IndexController.IqroSantriController.update);
+router.get(
+  "/getid/:id",
+  verifyToken,
+  IndexController.IqroSantriController.getHafalanId
+);
+router.post(
+  "/delete/:id",
+  verifyToken,
+  IndexController.IqroSantriController.delete
+);
+router.post(
+  "/update/:id",
+  verifyToken,
+  IndexController.IqroSantriController.update
+);
 
 export default router;
