@@ -22,6 +22,11 @@ router.post(
   verifyToken,
   IndexController.UserController.createNoFileUserSantri
 );
+router.get(
+  "/byrole/masterandadmin",
+  verifyToken,
+  IndexController.UserController.getUserByRoleMaterAdmin
+);
 router.get("/getall", verifyToken, IndexController.UserController.getAllUser);
 router.post(
   "/createuserfile",

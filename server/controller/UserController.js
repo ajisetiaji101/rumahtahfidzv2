@@ -245,6 +245,32 @@ export default class UserController {
     }
   }
 
+  static async getUserByRoleMaterAdmin(req, res) {
+    try {
+      console.log(
+        "===================== GET USER BY MASTER ADMIN AND ADMIN ======================="
+      );
+      const { id } = req.params;
+
+      const respon = await knex
+        .raw(`call user_getrolemasterandadmin()`)
+        .then((e) => e[0][0]);
+      const data = respon;
+
+      res.status(200).json({ data });
+    } catch (error) {
+      console.log(
+        `${new Date()}  IP :  ${req.socket.remoteAddress}  METHOD:  ${
+          req.method
+        } ERROR: ${error.message}`
+      );
+      console.log(
+        "===================== END USER BY MASTER ADMIN AND ADMIN  ======================="
+      );
+      return res.status(400).json({ data: "Data tidak ditemukan" });
+    }
+  }
+
   static async createUser(req, res) {
     try {
       console.log("===================== CREATE USER =======================");
