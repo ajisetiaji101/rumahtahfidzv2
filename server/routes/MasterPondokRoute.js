@@ -41,6 +41,11 @@ router.post(
   IndexController.MasterPondokController.updateMasterpondokNoFile
 );
 router.post(
+  "/updatetotaladmin/:id",
+  verifyToken,
+  IndexController.MasterPondokController.updateMasterpondokTotalAdmin
+);
+router.post(
   "/delete/:id",
   verifyToken,
   IndexController.MasterPondokController.deleteMasterpondok

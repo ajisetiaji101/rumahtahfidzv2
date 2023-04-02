@@ -414,6 +414,54 @@ export default class MasterPondokController {
       return res.status(400).json({ data: "Pastikan Semua data benar" });
     }
   }
+  static async updateMasterpondokTotalAdmin(req, res) {
+    console.log(
+      "===================== UPDATE MASTERPONDOK TOTAL ADMIN ======================="
+    );
+    try {
+      const { id } = req.params;
+      const { total_admin } = req.body;
+
+      const payload = {
+        total_admin,
+      };
+
+      console.log(payload);
+      const respon = await knex
+        .raw(
+          `call masterpondok_updatetotaladmin('${id}','${total_admin}', @hasil)`
+        )
+        .then((e) => e[0][0][0]);
+
+      const data = respon;
+
+      console.log(
+        `${new Date()}  IP :  ${req.socket.remoteAddress}  METHOD:  ${
+          req.method
+        }`
+      );
+      console.log(
+        "===================== END UPDATE MASTERPONDOK TOTAL ADMIN ======================="
+      );
+
+      if (data.hasil !== "success") {
+        return res.status(500).json({ data: data.hasil });
+      }
+
+      return res.status(200).json({ data });
+    } catch (error) {
+      console.log(
+        `${new Date()}  IP :  ${req.socket.remoteAddress}  METHOD:  ${
+          req.method
+        } ERROR: ${error.message}`
+      );
+      console.log(
+        "===================== END UPDATE MASTERPONDOK ======================="
+      );
+
+      return res.status(400).json({ data: "Pastikan Semua data benar" });
+    }
+  }
 
   static async deleteMasterpondok(req, res) {
     try {
