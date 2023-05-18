@@ -22,6 +22,22 @@ router.post(
   verifyToken,
   IndexController.UserController.createNoFileUserSantri
 );
+router.post(
+  "/createadminfile",
+  verifyToken,
+  uploadMultipleFileUser,
+  IndexController.UserController.createAdminFile
+);
+router.post(
+  "/createadminnofile",
+  verifyToken,
+  IndexController.UserController.createNoFileAdmin
+);
+router.get(
+  "/getadmin",
+  verifyToken,
+  IndexController.UserController.getUserAdmin
+);
 router.get(
   "/byrole/masterandadmin",
   verifyToken,
@@ -44,6 +60,17 @@ router.post(
   verifyToken,
   uploadMultipleFileUser,
   IndexController.UserController.updateUser
+);
+router.post(
+  "/updateadminnofile/:id",
+  verifyToken,
+  IndexController.UserController.updateAdminNoFile
+);
+router.post(
+  "/updateadmin/:id",
+  verifyToken,
+  uploadMultipleFileUser,
+  IndexController.UserController.updateAdmin
 );
 router.post(
   "/delete/:id",
@@ -71,5 +98,10 @@ router.post(
   IndexController.UserController.updateUserSantri
 );
 router.get("/:id", verifyToken, IndexController.UserController.getUserById);
+router.get(
+  "/getadminbyid/:id",
+  verifyToken,
+  IndexController.UserController.getAdminById
+);
 
 export default router;
