@@ -15,7 +15,9 @@ export default class UserController {
         .then((e) => e[0][0])
         .catch((err) => err);
 
-      if ((cekrole.role_id = "8b273d68-fe09-422d-a660-af3d8312f883")) {
+      console.log(cekrole);
+
+      if (cekrole.role_id == "8b273d68-fe09-422d-a660-af3d8312f883") {
         const responadmin = await knex
           .raw(`select * from vw_admin where email = '${email}'`)
           .then((e) => e[0][0])
