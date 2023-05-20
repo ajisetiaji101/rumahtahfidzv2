@@ -1,3 +1,4 @@
+import { request } from "express";
 import jwt from "jsonwebtoken";
 
 const verifyToken = (req, res, next) => {
@@ -10,7 +11,7 @@ const verifyToken = (req, res, next) => {
 
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
     if (err) return res.status(403).send("Invalid Token");
-    req.user_name = decoded.user_name;
+    req.user = decoded;
     next();
   });
 };

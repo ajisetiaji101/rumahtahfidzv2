@@ -2,6 +2,7 @@ import { Router } from "express";
 import IndexController from "../controller/IndexController.js";
 import { uploadMultipleFileUser } from "../helpers/uploadFileUser.js";
 import verifyToken from "../middleware/verifyToken.js";
+import authRole from "../middleware/authRole.js";
 
 const router = Router();
 
@@ -36,6 +37,7 @@ router.post(
 router.get(
   "/getadmin",
   verifyToken,
+  authRole(["8b273d68-fe09-422d-a660-af3d8312f883"]),
   IndexController.UserController.getUserAdmin
 );
 router.get(
