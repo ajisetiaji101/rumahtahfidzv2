@@ -17,7 +17,10 @@ export default class UserController {
 
       console.log(cekrole);
 
-      if (cekrole.role_id == "8b273d68-fe09-422d-a660-af3d8312f883") {
+      if (
+        cekrole.role_id == "8b273d68-fe09-422d-a660-af3d8312f883" ||
+        cekrole.role_id == "8b273d68-fe09-422d-a660-af3d8312f884"
+      ) {
         const responadmin = await knex
           .raw(`select * from vw_admin where email = '${email}'`)
           .then((e) => e[0][0])
@@ -235,6 +238,9 @@ export default class UserController {
           req.method
         } PARAMS: ${id}`
       );
+
+      console.log(respon);
+
       console.log(
         "===================== END ADMIN  BY ID ======================="
       );
