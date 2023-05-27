@@ -17,6 +17,7 @@ import { Router } from "express";
 import config from "../config/config.js";
 import auth from "../middleware/verifyToken.js";
 import verifyToken from "../middleware/verifyToken.js";
+import authRole from "../middleware/authRole.js";
 
 const router = Router();
 router.use(config.URL_API + "/laporan", verifyToken, LaporanRoute);
