@@ -170,7 +170,8 @@ export default class MasterPondokController {
 
       const respon = await knex
         .raw(
-          `call masterpondok_insert('${payload.id}','${payload.name}', '${payload.nit}', '${payload.address}', '${payload.telephone}', '${payload.chief}', '${payload.logo}', '${payload.photo}', @hasil)`
+          `call masterpondok_insert(?,?,?,?,?,?,?,?, @hasil)`,
+          [payload.id, payload.name, payload.nit, payload.address, payload.telephone, payload.chief, payload.logo, payload.photo]
         )
         .then((e) => e[0][0][0]);
 
@@ -236,7 +237,8 @@ export default class MasterPondokController {
 
         const respon = await knex
           .raw(
-            `call masterpondok_update('${id}','${payload.name}', '${payload.nit}', '${payload.address}', '${payload.telephone}', '${payload.chief}', '${payload.logo}', '${payload.photo}', @hasil)`
+            `call masterpondok_update(?,?,?,?,?,?,?,?, @hasil)`,
+            [id, payload.name, payload.nit, payload.address, payload.telephone, payload.chief, payload.logo, payload.photo]
           )
           .then((e) => e[0][0][0]);
 
@@ -285,7 +287,8 @@ export default class MasterPondokController {
 
         const respon = await knex
           .raw(
-            `call masterpondok_update('${id}','${payload.name}', '${payload.nit}', '${payload.address}', '${payload.telephone}', '${payload.chief}', '', '${payload.photo}', @hasil)`
+            `call masterpondok_update(?,?,?,?,?,?, '', ?, @hasil)`,
+            [id, payload.name, payload.nit, payload.address, payload.telephone, payload.chief, payload.photo]
           )
           .then((e) => e[0][0][0]);
 
@@ -330,7 +333,8 @@ export default class MasterPondokController {
 
         const respon = await knex
           .raw(
-            `call masterpondok_update('${id}','${payload.name}', '${payload.nit}', '${payload.address}', '${payload.telephone}', '${payload.chief}', '${payload.logo}', '', @hasil)`
+            `call masterpondok_update(?,?,?,?,?,?,?, '', @hasil)`,
+            [id, payload.name, payload.nit, payload.address, payload.telephone, payload.chief, payload.logo]
           )
           .then((e) => e[0][0][0]);
 
@@ -381,7 +385,8 @@ export default class MasterPondokController {
       console.log(payload);
       const respon = await knex
         .raw(
-          `call masterpondok_update('${id}','${payload.name}', '${payload.nit}', '${payload.address}', '${payload.telephone}', '${payload.chief}', '${payload.logo}', '', @hasil)`
+          `call masterpondok_update(?,?,?,?,?,?, '', '', @hasil)`,
+          [id, payload.name, payload.nit, payload.address, payload.telephone, payload.chief]
         )
         .then((e) => e[0][0][0]);
 

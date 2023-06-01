@@ -287,9 +287,22 @@ export default class SantriController {
         console.log(payload);
 
         const respon = await knex
-          .raw(
-            `call santris_insert('${payload.id}','${payload.name}','${payload.nis}','${payload.tempat}', '${payload.datebirth}', '${payload.gender}', '${payload.telephone}', '${payload.address}','${payload.ayah}','${payload.ibu}','${payload.mulai_masuk}','${payload.mulai_vakum}','${payload.pondokId}','${payload.photo}',@hasil )`
-          )
+          .raw(`call santris_insert('?,?,?,?,?,?,?,?,?,?,?,?,?,?,@hasil )`, [
+            payload.id,
+            payload.name,
+            payload.nis,
+            payload.tempat,
+            payload.datebirth,
+            payload.gender,
+            payload.telephone,
+            payload.address,
+            payload.ayah,
+            payload.ibu,
+            payload.mulai_masuk,
+            payload.mulai_vakum,
+            payload.pondokId,
+            payload.photo,
+          ])
           .then((e) => e[0][0][0]);
 
         const data = respon;
@@ -340,9 +353,21 @@ export default class SantriController {
         console.log(payload);
 
         const respon = await knex
-          .raw(
-            `call santris_insert('${payload.id}','${payload.name}','${payload.nis}','${payload.tempat}', '${payload.datebirth}', '${payload.gender}', '${payload.telephone}', '${payload.address}','${payload.ayah}','${payload.ibu}','${payload.mulai_masuk}',null,'${payload.pondokId}','${payload.photo}',@hasil )`
-          )
+          .raw(`call santris_insert('?,?,?,?,?,?,?,?,?,?,?,null,?,?,@hasil )`, [
+            payload.id,
+            payload.name,
+            payload.nis,
+            payload.tempat,
+            payload.datebirth,
+            payload.gender,
+            payload.telephone,
+            payload.address,
+            payload.ayah,
+            payload.ibu,
+            payload.mulai_masuk,
+            payload.pondokId,
+            payload.photo,
+          ])
           .then((e) => e[0][0][0]);
 
         const data = respon;
@@ -409,9 +434,22 @@ export default class SantriController {
 
         console.log(payload);
         const respon = await knex
-          .raw(
-            `call santris_update('${id}','${payload.name}','${payload.nis}','${payload.tempat}', '${payload.datebirth}', '${payload.gender}', '${payload.telephone}', '${payload.address}','${payload.ayah}','${payload.ibu}','${payload.mulai_masuk}',${payload.mulai_vakum},'${payload.pondokId}','${payload.photo}',@hasil )`
-          )
+          .raw(`call santris_update(?,?,?,?,?,?,?,?,?,?,?,?,?,?,@hasil )`, [
+            id,
+            payload.name,
+            payload.nis,
+            payload.tempat,
+            payload.datebirth,
+            payload.gender,
+            payload.telephone,
+            payload.address,
+            payload.ayah,
+            payload.ibu,
+            payload.mulai_masuk,
+            payload.mulai_vakum,
+            payload.pondokId,
+            payload.photo,
+          ])
           .then((e) => e[0][0][0]);
 
         const data = respon;
@@ -455,9 +493,22 @@ export default class SantriController {
           photo: files[0].file.newFilename,
         };
         const respon = await knex
-          .raw(
-            `call santris_update('${id}','${payload.name}','${payload.nis}','${payload.tempat}', '${payload.datebirth}', '${payload.gender}', '${payload.telephone}', '${payload.address}','${payload.ayah}','${payload.ibu}','${payload.mulai_masuk}','${payload.mulai_vakum}','${payload.pondokId}','${payload.photo}',@hasil )`
-          )
+          .raw(`call santris_update(?,?,?,?,?,?,?,?,?,?,?,?,?,?,@hasil )`, [
+            id,
+            payload.name,
+            payload.nis,
+            payload.tempat,
+            payload.datebirth,
+            payload.gender,
+            payload.telephone,
+            payload.address,
+            payload.ayah,
+            payload.ibu,
+            payload.mulai_masuk,
+            payload.mulai_vakum,
+            payload.pondokId,
+            payload.photo,
+          ])
           .then((e) => e[0][0][0]);
 
         const data = respon;
@@ -534,9 +585,21 @@ export default class SantriController {
         };
 
         const respon = await knex
-          .raw(
-            `call santris_update('${id}','${payload.name}','${payload.nis}','${payload.tempat}', '${payload.datebirth}', '${payload.gender}', '${payload.telephone}', '${payload.address}','${payload.ayah}','${payload.ibu}','${payload.mulai_masuk}',${payload.mulai_vakum},'${payload.pondokId}','',@hasil )`
-          )
+          .raw(`call santris_update(?,?,?,?,?,?,?,?,?,?,?,?,?,'',@hasil )`, [
+            id,
+            payload.name,
+            payload.nis,
+            payload.tempat,
+            payload.datebirth,
+            payload.gender,
+            payload.telephone,
+            payload.address,
+            payload.ayah,
+            payload.ibu,
+            payload.mulai_masuk,
+            payload.mulai_vakum,
+            payload.pondokId,
+          ])
           .then((e) => e[0][0][0]);
 
         const data = respon;
@@ -579,9 +642,21 @@ export default class SantriController {
 
         console.log(payload);
         const respon = await knex
-          .raw(
-            `call santris_update('${id}','${payload.name}','${payload.nis}','${payload.tempat}', '${payload.datebirth}', '${payload.gender}', '${payload.telephone}', '${payload.address}','${payload.ayah}','${payload.ibu}','${payload.mulai_masuk}','${payload.mulai_vakum}','${payload.pondokId}','',@hasil )`
-          )
+          .raw(`call santris_update(?,?,?,?,?,?,?,?,?,?,?,?,?,'',@hasil )`, [
+            id,
+            payload.name,
+            payload.nis,
+            payload.tempat,
+            payload.datebirth,
+            payload.gender,
+            payload.telephone,
+            payload.address,
+            payload.ayah,
+            payload.ibu,
+            payload.mulai_masuk,
+            payload.mulai_vakum,
+            payload.pondokId,
+          ])
           .then((e) => e[0][0][0]);
 
         const data = respon;
