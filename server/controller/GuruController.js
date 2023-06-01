@@ -210,7 +210,7 @@ export default class GuruController {
         );
 
         const respon = await knex
-          .raw(`call gurus_insert('?,?,?,?,?,?,?,?,?,?,?,?,?,?,@hasil )`, [
+          .raw(`call gurus_insert(?,?,?,?,?,?,?,?,?,?,?,?,?,?,@hasil )`, [
             payload.id,
             payload.name,
             payload.niu,
@@ -273,7 +273,7 @@ export default class GuruController {
           "===================== GET INSERT GURU ======================="
         );
         const respon = await knex
-          .raw(`call gurus_insert('?,?,?,?,?,?,?,?,?,?,?,null,?,?,@hasil )`, [
+          .raw(`call gurus_insert(?,?,?,?,?,?,?,?,?,?,?,null,?,?,@hasil )`, [
             payload.id,
             payload.name,
             payload.niu,
@@ -289,6 +289,8 @@ export default class GuruController {
             payload.photo,
           ])
           .then((e) => e[0][0][0]);
+
+        const data = respon;
 
         console.log(
           `${new Date()}  IP :  ${req.socket.remoteAddress}  METHOD:  ${

@@ -287,7 +287,7 @@ export default class SantriController {
         console.log(payload);
 
         const respon = await knex
-          .raw(`call santris_insert('?,?,?,?,?,?,?,?,?,?,?,?,?,?,@hasil )`, [
+          .raw(`call santris_insert(?,?,?,?,?,?,?,?,?,?,?,?,?,?,@hasil )`, [
             payload.id,
             payload.name,
             payload.nis,
@@ -353,7 +353,7 @@ export default class SantriController {
         console.log(payload);
 
         const respon = await knex
-          .raw(`call santris_insert('?,?,?,?,?,?,?,?,?,?,?,null,?,?,@hasil )`, [
+          .raw(`call santris_insert(?,?,?,?,?,?,?,?,?,?,?,null,?,?,@hasil )`, [
             payload.id,
             payload.name,
             payload.nis,

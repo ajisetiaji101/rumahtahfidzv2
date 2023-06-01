@@ -205,10 +205,16 @@ export default class PondokController {
       };
 
       const respon = await knex
-        .raw(
-          `call pondok_insert(?,?,?,?,?,?,?,?, @hasil)`
-          ,[payload.id, payload.name, payload.nit,  payload.address, payload.telephone, payload.chief, payload.photo, payload.masterpondokId]
-        )
+        .raw(`call pondok_insert(?,?,?,?,?,?,?,?, @hasil)`, [
+          payload.id,
+          payload.name,
+          payload.nit,
+          payload.address,
+          payload.telephone,
+          payload.chief,
+          payload.photo,
+          payload.masterpondokId,
+        ])
         .then((e) => e[0][0][0]);
 
       const data = respon;
@@ -302,10 +308,15 @@ export default class PondokController {
       };
 
       const respon = await knex
-        .raw(
-          `call pondok_update(?,?,?,?,?,?,?, @hasil)`,
-          [id,payload.name, payload.nit, payload.address, payload.telephone, payload.chief, payload.photo]
-        )
+        .raw(`call pondok_update(?,?,?,?,?,?,?, @hasil)`, [
+          id,
+          payload.name,
+          payload.nit,
+          payload.address,
+          payload.telephone,
+          payload.chief,
+          payload.photo,
+        ])
         .then((e) => e[0][0][0]);
 
       const data = respon;
@@ -359,10 +370,14 @@ export default class PondokController {
       };
 
       const respon = await knex
-        .raw(
-          `call pondok_update(?,?,?,?,?,?,'', @hasil)`,
-          [id, payload.name, payload.nit, payload.address, payload.telephone, payload.chief]
-        )
+        .raw(`call pondok_update(?,?,?,?,?,?,'', @hasil)`, [
+          id,
+          payload.name,
+          payload.nit,
+          payload.address,
+          payload.telephone,
+          payload.chief,
+        ])
         .then((e) => e[0][0][0]);
 
       const data = respon;
