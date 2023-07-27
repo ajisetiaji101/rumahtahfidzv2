@@ -407,10 +407,22 @@ export default class UserController {
       };
 
       const respon = await knex
-        .raw(
-          `call user_insertuser('${payload.id}','${payload.name}','${payload.email}','${payload.password}','${payload.telephone}','${payload.address}','${payload.age}','${payload.datebirth}','${payload.gender}','${payload.photo}','','${payload.roleId}','${payload.pondokId}', @hasil)`
-        )
+        .raw(`call user_insertuser(?,?,?,?,?,?,?,?,?,?,null,?,?, @hasil)`, [
+          payload.id,
+          payload.name,
+          payload.email,
+          payload.password,
+          payload.telephone,
+          payload.address,
+          payload.age,
+          payload.datebirth,
+          payload.gender,
+          payload.photo,
+          payload.roleId,
+          payload.pondokId,
+        ])
         .then((e) => e[0][0][0]);
+
       const data = respon;
 
       console.log(
@@ -484,10 +496,21 @@ export default class UserController {
       console.log(payload);
 
       const respon = await knex
-        .raw(
-          `call user_insertuser('${payload.id}','${payload.name}','${payload.email}','${payload.password}','${payload.telephone}','${payload.address}','${payload.age}','${payload.datebirth}','${payload.gender}','','','${payload.roleId}','${payload.pondokId}', @hasil)`
-        )
+        .raw(`call user_insertuser(?,?,?,?,?,?,?,?,?,null,null,?,?, @hasil)`, [
+          payload.id,
+          payload.name,
+          payload.email,
+          payload.password,
+          payload.telephone,
+          payload.address,
+          payload.age,
+          payload.datebirth,
+          payload.gender,
+          payload.roleId,
+          payload.pondokId,
+        ])
         .then((e) => e[0][0][0]);
+
       const data = respon;
 
       console.log(
@@ -559,9 +582,19 @@ export default class UserController {
         console.log(payload);
 
         const respon = await knex
-          .raw(
-            `call user_updateuser('${req.params.id}','${payload.name}','${payload.email}','${payload.password}','${payload.telephone}','${payload.address}','${payload.age}','${payload.datebirth}','${payload.gender}','','${payload.roleId}','${payload.pondokId}', @hasil)`
-          )
+          .raw(`call user_updateuser(?,?,?,?,?,?,?,?,?,null,?,?, @hasil)`, [
+            req.params.id,
+            payload.name,
+            payload.email,
+            payload.password,
+            payload.telephone,
+            payload.address,
+            payload.age,
+            payload.datebirth,
+            payload.gender,
+            payload.roleId,
+            payload.pondokId,
+          ])
           .then((e) => e[0][0][0]);
         const data = respon;
 
@@ -590,9 +623,18 @@ export default class UserController {
         console.log(payload);
 
         const respon = await knex
-          .raw(
-            `call user_updateuser('${req.params.id}','${payload.name}','${payload.email}','','${payload.telephone}','${payload.address}','${payload.age}','${payload.datebirth}','${payload.gender}','','${payload.roleId}','${payload.pondokId}', @hasil)`
-          )
+          .raw(`call user_updateuser(?,?,?,null,?,?,?,?,?,null,?,?, @hasil)`, [
+            req.params.id,
+            payload.name,
+            payload.email,
+            payload.telephone,
+            payload.address,
+            payload.age,
+            payload.datebirth,
+            payload.gender,
+            payload.roleId,
+            payload.pondokId,
+          ])
           .then((e) => e[0][0][0]);
         const data = respon;
 
@@ -639,9 +681,20 @@ export default class UserController {
         console.log(payload);
 
         const respon = await knex
-          .raw(
-            `call user_updateuser('${id}','${payload.name}','${payload.email}','${payload.password}','${payload.telephone}','${payload.address}','${payload.age}','${payload.datebirth}','${payload.gender}','${payload.photo}','${payload.roleId}','${payload.pondokId}', @hasil)`
-          )
+          .raw(`call user_updateuser(?,?,?,?,?,?,?,?,?,?,?,?, @hasil)`, [
+            req.params.id,
+            payload.name,
+            payload.email,
+            payload.password,
+            payload.telephone,
+            payload.address,
+            payload.age,
+            payload.datebirth,
+            payload.gender,
+            payload.photo,
+            payload.roleId,
+            payload.pondokId,
+          ])
           .then((e) => e[0][0][0]);
         const data = respon;
 
@@ -671,9 +724,19 @@ export default class UserController {
         console.log(payload);
 
         const respon = await knex
-          .raw(
-            `call user_updateuser('${id}','${payload.name}','${payload.email}','','${payload.telephone}','${payload.address}','${payload.age}','${payload.datebirth}','${payload.gender}','${payload.photo}','${payload.roleId}','${payload.pondokId}', @hasil)`
-          )
+          .raw(`call user_updateuser(?,?,?,null,?,?,?,?,?,?,?,?, @hasil)`, [
+            req.params.id,
+            payload.name,
+            payload.email,
+            payload.telephone,
+            payload.address,
+            payload.age,
+            payload.datebirth,
+            payload.gender,
+            payload.photo,
+            payload.roleId,
+            payload.pondokId,
+          ])
           .then((e) => e[0][0][0]);
 
         const data = respon;
@@ -773,10 +836,22 @@ export default class UserController {
       };
 
       const respon = await knex
-        .raw(
-          `call user_insertuser('${payload.id}','${payload.name}','${payload.email}','${payload.password}','${payload.telephone}','${payload.address}','${payload.age}','${payload.datebirth}','${payload.gender}','${payload.photo}','','${payload.roleId}','${payload.pondokId}', @hasil)`
-        )
+        .raw(`call user_insertuser(?,?,?,?,?,?,?,?,?,?,null,?,?, @hasil)`, [
+          payload.id,
+          payload.name,
+          payload.email,
+          payload.password,
+          payload.telephone,
+          payload.address,
+          payload.age,
+          payload.datebirth,
+          payload.gender,
+          payload.photo,
+          payload.roleId,
+          payload.pondokId,
+        ])
         .then((e) => e[0][0][0]);
+
       const data = respon;
 
       if (data.hasil !== "success") {
@@ -822,10 +897,21 @@ export default class UserController {
       };
 
       const respon = await knex
-        .raw(
-          `call user_insertuser('${payload.id}','${payload.name}','${payload.email}','${payload.password}','${payload.telephone}','${payload.address}','${payload.age}','${payload.datebirth}','${payload.gender}','','','${payload.roleId}','${payload.pondokId}', @hasil)`
-        )
+        .raw(`call user_insertuser(?,?,?,?,?,?,?,?,?,null,null,?,?, @hasil)`, [
+          payload.id,
+          payload.name,
+          payload.email,
+          payload.password,
+          payload.telephone,
+          payload.address,
+          payload.age,
+          payload.datebirth,
+          payload.gender,
+          payload.roleId,
+          payload.pondokId,
+        ])
         .then((e) => e[0][0][0]);
+
       const data = respon;
 
       if (data.hasil !== "success") {
@@ -862,66 +948,79 @@ export default class UserController {
   }
 
   static async createAdminFile(req, res) {
-    console.log("===================== INSERT ADMIN =======================");
-    const { files, fields } = req.fileAttrb;
+    try {
+      console.log("===================== INSERT ADMIN =======================");
+      const { files, fields } = req.fileAttrb;
 
-    const password = fields[2].value;
-    const hashPassword = bcrypt.hashSync(password, 10);
+      const password = fields[2].value;
+      const hashPassword = bcrypt.hashSync(password, 10);
 
-    const payload = {
-      id: uuid.v4(),
-      name: fields[0].value,
-      email: fields[1].value,
-      password: hashPassword,
-      telephone: fields[3].value,
-      address: fields[4].value,
-      datebirth: fields[5].value,
-      age: fields[6].value,
-      gender: fields[7].value,
-      roleId: fields[8].value,
-      masterpondokId: fields[9].value,
-      photo: files[0].file.newFilename,
-    };
+      const payload = {
+        id: uuid.v4(),
+        name: fields[0].value,
+        email: fields[1].value,
+        password: hashPassword,
+        telephone: fields[3].value,
+        address: fields[4].value,
+        datebirth: fields[5].value,
+        age: fields[6].value,
+        gender: fields[7].value,
+        roleId: fields[8].value,
+        masterpondokId: fields[9].value,
+        photo: files[0].file.newFilename,
+      };
 
-    const respon = await knex
-      .raw(
-        `call user_insertadmin('${payload.id}','${payload.name}','${payload.email}','${payload.password}','${payload.telephone}','${payload.address}','${payload.age}','${payload.datebirth}','${payload.gender}','${payload.photo}','','${payload.roleId}','${payload.masterpondokId}', @hasil)`
-      )
-      .then((e) => e[0][0][0]);
-    const data = respon;
+      const respon = await knex
+        .raw(`call user_insertadmin(?,?,?,?,?,?,?,?,?,?,null,?,?, @hasil)`, [
+          payload.id,
+          payload.name,
+          payload.email,
+          payload.password,
+          payload.telephone,
+          payload.address,
+          payload.age,
+          payload.datebirth,
+          payload.gender,
+          payload.photo,
+          payload.roleId,
+          payload.masterpondokId,
+        ])
+        .then((e) => e[0][0][0]);
 
-    console.log(
-      `${new Date()}  IP :  ${req.socket.remoteAddress}  METHOD:  ${
-        req.method
-      } FUNCTION : call user_insertadmin('${payload.id}','${payload.name}','${
-        payload.email
-      }','${payload.password}','${payload.telephone}','${payload.address}','${
-        payload.age
-      }','${payload.datebirth}','${payload.gender}','${payload.photo}','','${
-        payload.roleId
-      }','${payload.masterpondokId}', @hasil)`
-    );
-    console.log(
-      "===================== END CREATE USER ======================="
-    );
+      const data = respon;
 
-    if (data.hasil !== "success") {
-      return res.status(500).json({ data: data.hasil });
+      console.log(
+        `${new Date()}  IP :  ${req.socket.remoteAddress}  METHOD:  ${
+          req.method
+        } FUNCTION : call user_insertadmin('${payload.id}','${payload.name}','${
+          payload.email
+        }','${payload.password}','${payload.telephone}','${payload.address}','${
+          payload.age
+        }','${payload.datebirth}','${payload.gender}','${payload.photo}','','${
+          payload.roleId
+        }','${payload.masterpondokId}', @hasil)`
+      );
+      console.log(
+        "===================== END CREATE USER ======================="
+      );
+
+      if (data.hasil !== "success") {
+        return res.status(500).json({ data: data.hasil });
+      }
+
+      res.status(200).json({ data });
+    } catch (error) {
+      console.log(
+        `${new Date()}  IP :  ${req.socket.remoteAddress}  METHOD:  ${
+          req.method
+        } ERROR: ${error.message}`
+      );
+      console.log(
+        "===================== END CREATE ADMIN  ======================="
+      );
+
+      return res.status(404).json({ data: "Harap periksa kembali" });
     }
-
-    res.status(200).json({ data });
-  }
-  catch(error) {
-    console.log(
-      `${new Date()}  IP :  ${req.socket.remoteAddress}  METHOD:  ${
-        req.method
-      } ERROR: ${error.message}`
-    );
-    console.log(
-      "===================== END CREATE ADMIN  ======================="
-    );
-
-    return res.status(404).json({ data: "Harap periksa kembali" });
   }
 
   static async createNoFileAdmin(req, res) {
@@ -960,11 +1059,22 @@ export default class UserController {
 
       console.log(payload);
 
-      const respon = await knex
-        .raw(
-          `call user_insertuser('${payload.id}','${payload.name}','${payload.email}','${payload.password}','${payload.telephone}','${payload.address}','${payload.age}','${payload.datebirth}','${payload.gender}','','','${payload.roleId}','${payload.masterpondokId}', @hasil)`
-        )
-        .then((e) => e[0][0][0]);
+      const respon = await knex.raw(
+        `call user_insertuser(?,?,?,?,?,?,?,?,?,null,null,?,?, @hasil)`,
+        [
+          payload.id,
+          payload.name,
+          payload.email,
+          payload.password,
+          payload.telephone,
+          payload.address,
+          payload.age,
+          payload.gender,
+          payload.datebirth,
+          payload.roleId,
+          payload.masterpondokId,
+        ]
+      );
       const data = respon;
 
       console.log(
@@ -1036,9 +1146,19 @@ export default class UserController {
         console.log(payload);
 
         const respon = await knex
-          .raw(
-            `call user_updateadmin('${req.params.id}','${payload.name}','${payload.email}','${payload.password}','${payload.telephone}','${payload.address}','${payload.age}','${payload.datebirth}','${payload.gender}','','${payload.roleId}','${payload.masterpondokId}', @hasil)`
-          )
+          .raw(`call user_updateadmin(?,?,?,?,?,?,?,?,?,null,?,?, @hasil)`, [
+            req.params.id,
+            payload.name,
+            payload.email,
+            payload.password,
+            payload.telephone,
+            payload.address,
+            payload.age,
+            payload.datebirth,
+            payload.gender,
+            payload.roleId,
+            payload.masterpondokId,
+          ])
           .then((e) => e[0][0][0]);
         const data = respon;
 
@@ -1067,9 +1187,18 @@ export default class UserController {
         console.log(payload);
 
         const respon = await knex
-          .raw(
-            `call user_updateadmin('${req.params.id}','${payload.name}','${payload.email}','','${payload.telephone}','${payload.address}','${payload.age}','${payload.datebirth}','${payload.gender}','','${payload.roleId}','${payload.masterpondokId}', @hasil)`
-          )
+          .raw(`call user_updateadmin(?,?,?,null,?,?,?,?,?,null,?,?, @hasil)`, [
+            req.params.id,
+            payload.name,
+            payload.email,
+            payload.telephone,
+            payload.address,
+            payload.age,
+            payload.datebirth,
+            payload.gender,
+            payload.roleId,
+            payload.masterpondokId,
+          ])
           .then((e) => e[0][0][0]);
         const data = respon;
 
@@ -1116,10 +1245,22 @@ export default class UserController {
         console.log(payload);
 
         const respon = await knex
-          .raw(
-            `call user_updateadmin('${id}','${payload.name}','${payload.email}','${payload.password}','${payload.telephone}','${payload.address}','${payload.age}','${payload.datebirth}','${payload.gender}','${payload.photo}','${payload.roleId}','${payload.masterpondokId}', @hasil)`
-          )
+          .raw(`call user_updateadmin(?,?,?,?,?,?,?,?,?,?,?,?, @hasil)`, [
+            req.params.id,
+            payload.name,
+            payload.email,
+            payload.password,
+            payload.telephone,
+            payload.address,
+            payload.age,
+            payload.datebirth,
+            payload.gender,
+            payload.photo,
+            payload.roleId,
+            payload.masterpondokId,
+          ])
           .then((e) => e[0][0][0]);
+
         const data = respon;
 
         console.log(
@@ -1148,11 +1289,19 @@ export default class UserController {
         console.log(payload);
 
         const respon = await knex
-          .raw(
-            `call user_updateuser('${id}','${payload.name}','${payload.email}','','${payload.telephone}','${payload.address}','${payload.age}','${payload.datebirth}','${payload.gender}','${payload.photo}','${payload.roleId}','${payload.masterpondokId}', @hasil)`
-          )
+          .raw(`call user_updateadmin(?,?,?,null,?,?,?,?,?,null,?,?, @hasil)`, [
+            req.params.id,
+            payload.name,
+            payload.email,
+            payload.telephone,
+            payload.address,
+            payload.age,
+            payload.datebirth,
+            payload.gender,
+            payload.roleId,
+            payload.masterpondokId,
+          ])
           .then((e) => e[0][0][0]);
-
         const data = respon;
 
         console.log(

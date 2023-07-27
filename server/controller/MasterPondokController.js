@@ -169,10 +169,16 @@ export default class MasterPondokController {
       console.log(payload);
 
       const respon = await knex
-        .raw(
-          `call masterpondok_insert(?,?,?,?,?,?,?,?, @hasil)`,
-          [payload.id, payload.name, payload.nit, payload.address, payload.telephone, payload.chief, payload.logo, payload.photo]
-        )
+        .raw(`call masterpondok_insert(?,?,?,?,?,?,?,?, @hasil)`, [
+          payload.id,
+          payload.name,
+          payload.nit,
+          payload.address,
+          payload.telephone,
+          payload.chief,
+          payload.logo,
+          payload.photo,
+        ])
         .then((e) => e[0][0][0]);
 
       const data = respon;
@@ -236,10 +242,16 @@ export default class MasterPondokController {
         console.log(payload);
 
         const respon = await knex
-          .raw(
-            `call masterpondok_update(?,?,?,?,?,?,?,?, @hasil)`,
-            [id, payload.name, payload.nit, payload.address, payload.telephone, payload.chief, payload.logo, payload.photo]
-          )
+          .raw(`call masterpondok_update(?,?,?,?,?,?,?,?, @hasil)`, [
+            id,
+            payload.name,
+            payload.nit,
+            payload.address,
+            payload.telephone,
+            payload.chief,
+            payload.logo,
+            payload.photo,
+          ])
           .then((e) => e[0][0][0]);
 
         const data = respon;
@@ -286,10 +298,15 @@ export default class MasterPondokController {
         console.log(payload);
 
         const respon = await knex
-          .raw(
-            `call masterpondok_update(?,?,?,?,?,?, '', ?, @hasil)`,
-            [id, payload.name, payload.nit, payload.address, payload.telephone, payload.chief, payload.photo]
-          )
+          .raw(`call masterpondok_update(?,?,?,?,?,?, '', ?, @hasil)`, [
+            id,
+            payload.name,
+            payload.nit,
+            payload.address,
+            payload.telephone,
+            payload.chief,
+            payload.photo,
+          ])
           .then((e) => e[0][0][0]);
 
         const data = respon;
@@ -332,10 +349,15 @@ export default class MasterPondokController {
         console.log(payload);
 
         const respon = await knex
-          .raw(
-            `call masterpondok_update(?,?,?,?,?,?,?, '', @hasil)`,
-            [id, payload.name, payload.nit, payload.address, payload.telephone, payload.chief, payload.logo]
-          )
+          .raw(`call masterpondok_update(?,?,?,?,?,?,?, '', @hasil)`, [
+            id,
+            payload.name,
+            payload.nit,
+            payload.address,
+            payload.telephone,
+            payload.chief,
+            payload.logo,
+          ])
           .then((e) => e[0][0][0]);
 
         const data = respon;
@@ -384,10 +406,14 @@ export default class MasterPondokController {
 
       console.log(payload);
       const respon = await knex
-        .raw(
-          `call masterpondok_update(?,?,?,?,?,?, '', '', @hasil)`,
-          [id, payload.name, payload.nit, payload.address, payload.telephone, payload.chief]
-        )
+        .raw(`call masterpondok_update(?,?,?,?,?,?, '', '', @hasil)`, [
+          id,
+          payload.name,
+          payload.nit,
+          payload.address,
+          payload.telephone,
+          payload.chief,
+        ])
         .then((e) => e[0][0][0]);
 
       const data = respon;
